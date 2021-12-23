@@ -19,6 +19,19 @@ class TreeNode:
 # @lc code=start
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not preorder:
+            return None
+        root = TreeNode(preorder[0])
+        leftTreeLen = inorder.index(preorder[0])
+        root.left = self.buildTree(preorder[1:leftTreeLen+1], inorder[:leftTreeLen])
+        root.right = self.buildTree(preorder[leftTreeLen+1:], inorder[leftTreeLen+1:])
+        return root
+# @lc code=end
+
+
+'''
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         hashMap = {element: i for i, element in enumerate(inorder)}
         def dfs(preorder: List[int], inorder: List[int]):
             if not preorder:
@@ -29,7 +42,7 @@ class Solution:
             root.right = dfs(preorder[leftTreeLen+1:], inorder[leftTreeLen+1:])
             return root
         return dfs(preorder, inorder)
-# @lc code=end
+'''
 
 
 # Test

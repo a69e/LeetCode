@@ -17,6 +17,27 @@ class Node:
 # @lc code=start
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
+        
+        def connect2nodes(node1: 'Node', node2: 'Node'):
+            if not node1 or not node2:
+                return
+            node1.next = node2
+            connect2nodes(node1.left, node1.right)
+            connect2nodes(node1.right, node2.left)
+            connect2nodes(node2.left, node2.right)
+        
+        if not root:
+            return None
+        connect2nodes(root.left, root.right)
+        return root
+        
+# @lc code=end
+
+
+# Iteration
+'''
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
         if not root:
             return None
         leftMost = root
@@ -29,7 +50,7 @@ class Solution:
                 head = head.next
             leftMost = leftMost.left
         return root
-# @lc code=end
+'''
 
 
 # Test
