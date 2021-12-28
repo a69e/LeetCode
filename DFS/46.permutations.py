@@ -45,6 +45,30 @@ from typing import List
 # @lc code=start
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        temp = [11] * len(nums)
+
+        def backtrack(nums: List[int], index: int):
+            if index == len(nums):
+                ans.append(list(temp))
+                return
+            for i in range(len(nums)):
+                if temp[i] != 11:
+                    continue
+                else:
+                    temp[i] = nums[index]
+                backtrack(nums, index+1)
+                temp[i] = 11
+
+        backtrack(nums, 0)
+        return ans
+
+# @lc code=end
+
+
+'''
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
         self.ans = []
 
         def backtrack(nums: List[int], ans: List[int]):
@@ -56,8 +80,7 @@ class Solution:
 
         backtrack(nums, [])
         return self.ans
-        
-# @lc code=end
+'''
 
 
 # Test
